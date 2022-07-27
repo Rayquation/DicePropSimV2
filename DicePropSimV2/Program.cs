@@ -10,31 +10,32 @@ namespace DicePropSimV2
     {
         static void Main(string[] args)
         {
+            Program x = new Program();
             Console.Write("Indtast mængde af terninger => ");
             int dice = Convert.ToInt32(Console.ReadLine());
-            string amount = Posibillity(dice);
+            string amount = x.Posibillity(dice);
             List<int> Dies = new List<int>();
             for (int i = 0; i < dice; i++)
             {
-                Dies.Add(Random());
+                Dies.Add(x.Random());
                 Console.WriteLine(Dies[i]);
             }
             //double pos = (double)Outcome(Dies.Sum(), listOfLists,dice)/amount*100.00;
             Console.WriteLine($"Forskellige muligheder af slag => {amount}");
-            dicesSum(dice, Dies.Sum());
+            x.dicesSum(dice, Dies.Sum());
             Console.ReadKey();
         }
-        public static string Posibillity(int Amount)
+        public string Posibillity(int Amount)
         {
             string pos = Convert.ToString(Math.Pow(6, Amount));
             return pos;
         }
-        public static int Random()
+        public int Random()
         {
             Random rand = new Random();
             return rand.Next(1, 7);
         }
-        static void dicesSum(int num, int desire)
+        void dicesSum(int num, int desire)
         {
             double[,] dp = new double[num + 1, 6 * num + 1];
             //Checker for alle mulighederne for 1 terning
