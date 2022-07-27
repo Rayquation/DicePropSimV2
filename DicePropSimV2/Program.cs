@@ -12,7 +12,7 @@ namespace DicePropSimV2
         {
             Console.Write("Indtast mængde af terninger => ");
             int dice = Convert.ToInt32(Console.ReadLine());
-            int amount = Posibillity(dice);
+            string amount = Posibillity(dice);
             List<int> Dies = new List<int>();
             for (int i = 0; i < dice; i++)
             {
@@ -24,10 +24,10 @@ namespace DicePropSimV2
             dicesSum(dice, Dies.Sum());
             Console.ReadKey();
         }
-        public static int Posibillity(int Amount)
+        public static string Posibillity(int Amount)
         {
-            double pos = Math.Pow(6, Amount);
-            return (int)pos;
+            string pos = Convert.ToString(Math.Pow(6, Amount));
+            return pos;
         }
         public static int Random()
         {
