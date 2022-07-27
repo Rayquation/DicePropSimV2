@@ -13,10 +13,11 @@ namespace DicePropSimV2
             Console.Write("Indtast mængde af terninger => ");
             int dice = Convert.ToInt32(Console.ReadLine());
             int amount = Posibillity(dice);
-            List<int> Dies= new List<int>();
-            for(int i = 0; i < dice; i++)
+            List<int> Dies = new List<int>();
+            for (int i = 0; i < dice; i++)
             {
                 Dies.Add(Random());
+                Console.WriteLine(Dies[i]);
             }
             //double pos = (double)Outcome(Dies.Sum(), listOfLists,dice)/amount*100.00;
             Console.WriteLine($"Forskellige muligheder af slag => {amount}");
@@ -31,30 +32,31 @@ namespace DicePropSimV2
         public static int Random()
         {
             Random rand = new Random();
-            return rand.Next(1,7);
+            return rand.Next(1, 7);
         }
-        static void dicesSum(int num,int desire)
+        static void dicesSum(int num, int desire)
         {
-            double[,] dp = new double[num+1 , 6 * num+1];
+            double[,] dp = new double[num + 1, 6 * num + 1];
             //Checker for alle mulighederne for 1 terning
             for (int i = 1; i <= 6; i++)
             {
                 dp[1, i] = 1 / 6.0;
             }
             //For loop som er for 2 terninger
-            for (int i=2;i<=num;i++)
+            for (int i = 2; i <= num; i++)
                 //For loop som er for terninger og derop
-                for(int j=i-1;j<=6*(i-1);j++)
-                    for(int k = 1; k <= 6; k++)
+                for (int j = i - 1; j <= 6 * (i - 1); j++)
+                    for (int k = 1; k <= 6; k++)
                     {
-                        dp[i, j + k] += (dp[i-1, j] * dp[1, k]);
+                        dp[i, j + k] += (dp[i - 1, j] * dp[1, k]);
                     }
-            for(int i = num; i <= 6 * num; i++)
+
+            for (int i = num; i <= 6 * num; i++)
             {
                 if (desire == i)
                 {
-                    double value= (dp[num, i]*100.00);
-                    Console.WriteLine($"{i} {value:N3} %");
+                    double value = (dp[num, i] * 100.00);
+                    Console.WriteLine($"Samlede sum af {num} terninger er {i}. Muligheden for dette er {value:N3} %");
                 }
             }
         }
